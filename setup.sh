@@ -44,13 +44,11 @@ git clone https://github.com/zlsun/solarized-man.git $ZSH_CUSTOM/plguins/solariz
 git clone https://github.com/uuner/sedtris.git /opt
 gem install colorls
 
-# Pull and place .zshrc and .gitconfig
-wget -O $HOME/.zshrc https://raw.githubusercontent.com/sebrink/dotfiles/master/.zshrc
-wget -O $HOME/.gitconfig https://raw.githubusercontent.com/sebrink/dotfiles/master/.gitconfig
-
 # Fonts (Not totally automatic, need to set in iterm2)
 brew install font-hack-nerd-font
 
-# Move dotfiles into the correct place
+# Setup dotfiles
+git clone https://github.com/sebrink/dotfiles $HOME 
 mv $HOME/dotfiles/.gitconfig $HOME/.gitconfig
 ln -sv $HOME/dotfiles/.zshrc $HOME/.zshrc
+ln -sv $HOME/dotfiles/.vimrc $HOME/.vimrc
