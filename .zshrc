@@ -10,7 +10,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 ## Plugins
-plugins=( git oh-my-matrix pip python osx zsh-syntax-highlighting zsh-apple-touchbar solarized-man )
+plugins=( git oh-my-matrix pip python osx zsh-syntax-highlighting zsh-apple-touchbar )
 source $ZSH/oh-my-zsh.sh
 
 ## If purepower theme      
@@ -42,9 +42,8 @@ alias ls="colorls"
 alias tetris="bash /opt/sedtris/sedtris.sh"
 alias con="ping -c 2 1.1.1.1"
 
-## Fuck and Colorls settings
+# Fuck settings
 eval $(thefuck --alias)
-eval "$(rbenv init -)"
 
 ## Disable annoying settings
 unsetopt correct_all
