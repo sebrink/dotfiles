@@ -5,6 +5,8 @@
 #   - Automate iterm2 font selection (using defaults command?)
 #   - Automate iterm2 profile
 #   - Set installed browser as default browser
+#   - Remove enter click on brew installation
+#   - Add slack, spotify, spectacle, vmware-fusion, signal, vlc, vivaldi, google chrome, firefox, virtualbox, postman, android studio
 
 # Install brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -26,10 +28,7 @@ brew install wget coreutils findutils tree git ssh-copy-id htop sl thefuck
 brew cask install brave-browser 
 
 # Useful applications 
-brew cask install iterm2 visual-studio-code vagrant docker virtualbox
-
-# Virtualbox error workaround for now
-read -p "Press enter to continue (Fix virtualbox error)"
+brew cask install iterm2 visual-studio-code vagrant docker
 
 # Themes
 git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k/
