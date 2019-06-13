@@ -7,14 +7,14 @@
 #   - Automatically switch shells (at the end)
 #   - Automate iterm2 font selection
 
+# Install brew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 # Make sure everything is run as root
 if [[ $EUID -ne 0 ]]; then
    echo "Please run this script as root (this code will 100% hack you, so read it!)"
    exit 1
 fi
-
-# Install brew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Install oh-my-zsh
 brew install zsh
