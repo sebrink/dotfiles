@@ -9,7 +9,7 @@
 #   - Automate iterm2 font selection
 
 # Install brew
-/usr/bin/ruby -e "(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Install oh-my-zsh
 brew install zsh curl
@@ -24,8 +24,8 @@ brew tap caskroom/fonts
 brew install wget coreutils findutils tree git ssh-copy-id htop sl
 
 # Useful applications 
-brew install visual-studio-code docker virtualbox vagrant thefuck
-brew cask install iterm2 brave-browser
+brew install docker virtualbox vagrant thefuck
+brew cask install iterm2 brave-browser visual-studio-code
 
 # Themes
 git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k/
@@ -38,7 +38,6 @@ git clone https://github.com/floor114/zsh-apple-touchbar $HOME/.oh-my-zsh/custom
 git clone https://github.com/zlsun/solarized-man.git $HOME/.oh-my-zsh/custom/plugins/solarized-man/
 
 # Other dependencies
-git clone https://github.com/uuner/sedtris.git /opt
 gem install colorls
 
 # Fonts (Not totally automatic, need to set in iterm2)
@@ -51,3 +50,6 @@ rm $HOME/.zshrc
 ln -sv $HOME/dotfiles/.zshrc $HOME/.zshrc
 rm $HOME/.vimrc
 ln -sv $HOME/dotfiles/.vimrc $HOME/.vimrc
+
+# Seriously? Sudo for tetris? Why does it have to be in opt?
+sudo git clone https://github.com/uuner/sedtris.git /opt
