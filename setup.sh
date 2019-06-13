@@ -2,33 +2,30 @@
 # Script to automate install of my dotfiles on a new OSX machine! 
 #   - You will need to set the iterm2 font.
 #   - Takes about <insert time here>
+#   - Must make zsh default shell on your own (this is the next feature to be added)
 # TODO: 
-#   - Install brew
 #   - Give time estimate
 #   - Automatically switch shells (at the end)
 #   - Automate iterm2 font selection
 
-# Make sure everything is run as root
-if [[ $EUID -ne 0 ]]; then
-   echo "Please run this script as root (this code will 100% hack you, so read it!)"
-   exit 1
-fi
+# Install brew
+/usr/bin/ruby -e "(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Install oh-my-zsh
-brew install zsh
-brew install curl
-sh -c "$(curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended"
+brew install zsh curl
+curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+sh install.sh --unattended
 
 # Tap some useful things
 brew tap caskroom/cask
 brew tap caskroom/fonts
 
 # Other useful utilities
-brew install wget coreutils findutils curl tree git ssh-copy-id htop sl
+brew install wget coreutils findutils tree git ssh-copy-id htop sl
 
 # Useful applications 
-brew install java visual-studio-code docker virtualbox vagrant thefuck
-brew cask install iterm2 brave
+brew install visual-studio-code docker virtualbox vagrant thefuck
+brew cask install iterm2 brave-browser
 
 # Themes
 git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k/
@@ -45,7 +42,7 @@ git clone https://github.com/uuner/sedtris.git /opt
 gem install colorls
 
 # Fonts (Not totally automatic, need to set in iterm2)
-brew install font-hack-nerd-font
+brew cask install font-hack-nerd-font
 
 # Setup dotfiles
 git clone https://github.com/sebrink/dotfiles.git $HOME/dotfiles 
