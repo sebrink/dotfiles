@@ -4,6 +4,7 @@
 #   - Takes about <insert time here>
 # TODO: 
 #   - Give time estimate
+#   - Automatically switch shells (at the end)
 #   - Automate iterm2 font selection
 
 # Make sure everything is run as root
@@ -13,10 +14,11 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Install brew
-/usr/bin/ruby -e "(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Install oh-my-zsh
 brew install zsh
+brew install curl
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Tap some useful things
