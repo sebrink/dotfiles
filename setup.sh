@@ -24,8 +24,7 @@ brew tap caskroom/fonts
 brew install wget coreutils findutils tree git ssh-copy-id htop sl
 
 # Useful applications 
-brew install docker virtualbox vagrant thefuck
-brew cask install iterm2 brave-browser visual-studio-code
+brew cask install iterm2 brave-browser visual-studio-code virtualbox vagrant docker
 
 # Themes
 git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k/
@@ -35,10 +34,6 @@ git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/t
 git clone https://github.com/amstrad/oh-my-matrix.git $HOME/.oh-my-zsh/custom/plugins/oh-my-matrix/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/
 git clone https://github.com/floor114/zsh-apple-touchbar $HOME/.oh-my-zsh/custom/plugins/zsh-apple-touchbar/
-git clone https://github.com/zlsun/solarized-man.git $HOME/.oh-my-zsh/custom/plugins/solarized-man/
-
-# Other dependencies
-gem install colorls
 
 # Fonts (Not totally automatic, need to set in iterm2)
 brew cask install font-hack-nerd-font
@@ -51,5 +46,6 @@ ln -sv $HOME/dotfiles/.zshrc $HOME/.zshrc
 rm $HOME/.vimrc
 ln -sv $HOME/dotfiles/.vimrc $HOME/.vimrc
 
-# Seriously? Sudo for tetris? Why does it have to be in opt?
+# Sudo to fix colorls and to place something in opt
+sudo gem install colorls
 sudo git clone https://github.com/uuner/sedtris.git /opt
