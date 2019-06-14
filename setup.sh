@@ -9,9 +9,11 @@
 #   - Add slack, spotify, spectacle, vmware-fusion, signal, vlc, vivaldi, google chrome, firefox, virtualbox, postman, android studio
 #	- Add colors to the install messages
 #	- See if applescript will do anything better than what is being done now
+#   - Automate the dock setup (on the left with my expected setup)
 
 # Install brew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+echo " [+] Installing brew and tapping useful casks... "
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
 
 # Tap some useful things
 brew tap caskroom/cask
@@ -39,29 +41,28 @@ brew install ${PACKAGES[@]}
 
 # Useful applications 
 CASKS=(
-	brave-browser
 	iterm2
 	visual-studio-code
 	vagrant
 	docker
-	font-hack-nerd-font
+	postman
 	spotify
 	spectacle
 	signal
-	vivaldi
-	firefox
 	android-studio
 	vmware-fusion
-	vlc
+    brave-browser
+    vivaldi
 	google-chrome
-	postman
-	virtualbox
+    firefox
+    font-hack-nerd-font
+    virtualbox
 )
 
 echo " [+] Installing Casks... "
 echo " [+] Note: You will need to accept Oracle as a trusted installer for vbox."
 echo " [+] At the moment this means just rerun `brew reinstall virtualbox` after this script."
-brew install ${CASKS[@]}
+brew cask install ${CASKS[@]}
 
 echo " [+] Installing the oh-my-zsh... " 
 curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh

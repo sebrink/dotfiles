@@ -2,23 +2,15 @@
 
 ### Setup instructions (OSX Only)
 - bash setup.sh 
-- **That's it.** You'll need to hit enter once for the brew installation, but the rest is totally automated. Three things at the end require sudo. Do not run the script as sudo, as brew doesn't like that.
+- **That's it.** 
+- Three things at the end require sudo. Do not run the script as sudo, as brew doesn't like that
 
 ### TODO (Listed at top of setup.sh)
-- Automate iterm2 font selection (defaults command?)
-- Automate iterm2 profile settings (defaults command?)
-- Set Brave as browser of choice
+- Set the right click to the bottom right of the touchpad
+- Automate iterm2 font selection (using defaults command?)
+- Automate iterm2 profile
+- Set browser as default browser (browser of choice atm is brave)
 - Remove enter click on brew installation
-- Add the following programs
-  - slack
-  - spotify
-  - spectacle
-  - vmware-fusion
-  - signal
-  - vlc
-  - vivaldi
-  - google chrome
-  - firefox 
-  - virtualbox 
-  - postman 
-  - android studio
+- Add colors to the install messages
+- See if applescript will do anything better than what is being done now
+- Automate the dock setup (on the left with my expected setup)
