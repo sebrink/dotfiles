@@ -8,7 +8,7 @@
 #   - Remove enter click on brew installation
 #   - Add slack, spotify, spectacle, vmware-fusion, signal, vlc, vivaldi, google chrome, firefox, virtualbox, postman, android studio
 #	- Add colors to the install messages
-#	- See if applescript will do anything better?
+#	- See if applescript will do anything better than what is being done now
 
 # Install brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -45,9 +45,22 @@ CASKS=(
 	vagrant
 	docker
 	font-hack-nerd-font
+	spotify
+	spectacle
+	signal
+	vivaldi
+	firefox
+	android-studio
+	vmware-fusion
+	vlc
+	google-chrome
+	postman
+	virtualbox
 )
 
 echo " [+] Installing Casks... "
+echo " [+] Note: You will need to accept Oracle as a trusted installer for vbox."
+echo " [+] At the moment this means just rerun `brew reinstall virtualbox` after this script."
 brew install ${CASKS[@]}
 
 echo " [+] Installing the oh-my-zsh... " 
@@ -56,7 +69,7 @@ sh install.sh --unattended
 rm install.sh
 
 # Themes
-echo " [+] Downloading themes and plugins... "
+echo " [+] Downloading oh-my-zsh themes and plugins... "
 git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k/
 ( cd && curl -fsSLO https://raw.githubusercontent.com/romkatv/dotfiles-public/master/.purepower )
 
