@@ -4,12 +4,12 @@
 # TODO: 
 #   - Automate iterm2 font selection (using defaults command?)
 #   - Automate iterm2 profile
-#   - Set installed browser as default browser
-#   - Remove enter click on brew installation
-#   - Add slack, spotify, spectacle, vmware-fusion, signal, vlc, vivaldi, google chrome, firefox, virtualbox, postman, android studio
+#   - Set preferred browser as default browser
 #	- Add colors to the install messages
 #	- See if applescript will do anything better than what is being done now
 #   - Automate the dock setup (on the left with my expected setup)
+#   - Remove password from vagrant install (not sure of how to do this yet)
+#   - Figure out a way to install virtualbox without having to do security perms
 
 # Install brew
 echo " [+] Installing brew and tapping useful casks... "
@@ -51,17 +51,14 @@ CASKS=(
 	signal
 	android-studio
 	vmware-fusion
-    brave-browser
-    vivaldi
+	brave-browser
+	vivaldi
 	google-chrome
-    firefox
-    font-hack-nerd-font
-    virtualbox
+	firefox
+	font-hack-nerd-font
 )
 
 echo " [+] Installing Casks... "
-echo " [+] Note: You will need to accept Oracle as a trusted installer for vbox."
-echo " [+] At the moment this means just rerun `brew reinstall virtualbox` after this script."
 brew cask install ${CASKS[@]}
 
 echo " [+] Installing the oh-my-zsh... " 
@@ -91,5 +88,7 @@ ln -sv $HOME/dotfiles/.vimrc $HOME/.vimrc
 # Colorls, make tetirs, set zsh
 echo " [+] Installing colorls, sedtris, and your new shell... "
 sudo gem install colorls
-sudo git clone https://github.com/uuner/sedtris.git /opt
+sudo git clone https://github.com/uuner/sedtris.git /opt/sedtris
+
+# This line sets ZSH as the curr user's shell. Catalina, come fast so I can remove this.
 sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
