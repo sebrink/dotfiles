@@ -1,14 +1,19 @@
 #!/bin/bash
 # Script to automate the install of my dotfiles on a new OSX machine! 
 #   - You will need to set the iterm2 font.
+#   - VMWare fusion needs password
+#   - Vagrant needs password
 # TODO: 
 #   - Automate iterm2 font selection (using defaults command?)
 #   - Automate iterm2 profile
 #   - Set preferred browser as default browser
 #	- Add colors to the install messages
 #	- See if applescript will do anything better than what is being done now
-#   - Automate the dock setup (on the left with my expected setup)
-#   - Remove password from vagrant install (not sure of how to do this yet)
+#       - Deleting applications
+#           - https://discussions.apple.com/thread/3909964
+#           - https://apple.stackexchange.com/questions/103621/run-applescript-from-bash-script
+#   - Set trackpad to right click on bottom right
+#   - Remove password from vagrant and vmware-fusion install (not sure of how to do this yet)
 #   - Figure out a way to install virtualbox without having to do security perms
 
 # Install brew
@@ -92,3 +97,14 @@ sudo git clone https://github.com/uuner/sedtris.git /opt/sedtris
 
 # This line sets ZSH as the curr user's shell. Catalina, come fast so I can remove this.
 sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+
+# Testing zone
+
+# Adding Icons to the Dock
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Chrome.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+
+# Sets autohide on the dock
+defaults write com.apple.dock autohide -int 1
+
+# Sets dock to the left side of the screen
+defaults write com.appl.dock orientation left
