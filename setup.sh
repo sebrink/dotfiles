@@ -61,6 +61,8 @@ CASKS=(
 	google-chrome
 	firefox
 	font-hack-nerd-font
+	sloth
+	mtmr
 )
 
 echo " [+] Installing Casks... "
