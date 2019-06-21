@@ -14,7 +14,10 @@
 #           - https://apple.stackexchange.com/questions/103621/run-applescript-from-bash-script
 #   - Set trackpad to right click on bottom right
 #   - Remove password from vagrant and vmware-fusion install (not sure of how to do this yet)
-#   - Figure out a way to install virtualbox without having to do security perms
+#	- Problem children:
+#		- Virtualbox
+#		- Vagrant
+#		- MTMR
 
 # Install brew
 echo " [+] Installing brew and tapping useful casks... "
@@ -48,7 +51,6 @@ brew install ${PACKAGES[@]}
 CASKS=(
 	iterm2
 	visual-studio-code
-	vagrant
 	docker
 	postman
 	spotify
@@ -62,7 +64,9 @@ CASKS=(
 	firefox
 	font-hack-nerd-font
 	sloth
+	vagrant
 	mtmr
+	vagrant-manager
 )
 
 echo " [+] Installing Casks... "
@@ -91,6 +95,8 @@ rm $HOME/.zshrc
 ln -sv $HOME/dotfiles/.zshrc $HOME/.zshrc
 rm $HOME/.vimrc
 ln -sv $HOME/dotfiles/.vimrc $HOME/.vimrc
+rm $HOME/Library/Applications\ Support/MTMR/items.json
+ln -sv $HOME/dotfiles/items.json $HOME/Library/Application\ Support/MTMR/items.json
 
 # Colorls, make tetirs, set zsh
 echo " [+] Installing colorls, sedtris, and your new shell... "
