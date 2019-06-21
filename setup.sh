@@ -1,23 +1,13 @@
 #!/bin/bash
-# Script to automate the install of my dotfiles on a new OSX machine! 
-#   - You will need to set the iterm2 font.
-#   - VMWare fusion needs password
-#   - Vagrant needs password
+# Script to automate configs on a new OSX machine! 
 # TODO: 
 #   - Automate iterm2 font selection (using defaults command?)
-#   - Automate iterm2 profile
 #   - Set preferred browser as default browser
-#	- Add colors to the install messages
-#	- See if applescript will do anything better than what is being done now
-#       - Deleting applications
-#           - https://discussions.apple.com/thread/3909964
-#           - https://apple.stackexchange.com/questions/103621/run-applescript-from-bash-script
-#   - Set trackpad to right click on bottom right
-#   - Remove password from vagrant and vmware-fusion install (not sure of how to do this yet)
 #	- Problem children:
 #		- Virtualbox
 #		- Vagrant
 #		- MTMR
+#	- May just give a message to double check on the problem children (probably aren't installed right)
 
 # Install brew
 echo " [+] Installing brew and tapping useful casks... "
@@ -67,6 +57,7 @@ CASKS=(
 	vagrant
 	mtmr
 	vagrant-manager
+	virtualbox
 )
 
 echo " [+] Installing Casks... "
@@ -106,13 +97,45 @@ sudo git clone https://github.com/uuner/sedtris.git /opt/sedtris
 # This line sets ZSH as the curr user's shell. Catalina, come fast so I can remove this.
 sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 
-# Testing zone
+# Defaults time!
+
+# Trackpad: map bottom right corner to right-click
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+
+# Save screenshots to the desktop
+defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+
+# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
+defaults write com.apple.finder QuitMenuItem -bool true
+
+# Remove all default applications on dock
+defaults write com.apple.dock persistent-apps -array
 
 # Adding Icons to the Dock
+# THIS IS SO GOING TO BREAK LOL
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Chrome.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Slack.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Brave Browser.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/VMware Fusion.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Visual Studio Code.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Spotify.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Messages.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
 # Sets autohide on the dock
 defaults write com.apple.dock autohide -int 1
 
 # Sets dock to the left side of the screen
 defaults write com.appl.dock orientation left
+
+# Disable the annoying line marks in iterm2
+defaults write com.apple.Terminal ShowLineMarks -int 0
+
+# Remove iterm2 prompt on quit
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
+echo "\nInstall complete!\nCheck on the installs of MTMR, Vagrant, and Virtualbox. These may need to be done by hand.\nAlso, remember to change the font on iterm2 and set your default browser!"
