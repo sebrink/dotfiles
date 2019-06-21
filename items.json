@@ -87,7 +87,16 @@
   { "type": "previous", "width": 44, "bordered": false, "align": "center" },
   { "type": "play", "width": 44, "bordered": false, "align": "center" },
   { "type": "next", "width": 44, "bordered": false,"align": "center" },
-  { "type": "weather", "refreshInterval": 60, "units": "imperial", "align": "right", "bordered": false, "icon_type": "images", "api_key": "63c040d43251adf726d4478ff209ef59"},
+  { 
+    "type": "weather", 
+    "refreshInterval": 60, 
+    "units": "imperial", 
+    "align": "right", 
+    "bordered": false, 
+    "icon_type": "images", 
+    //It's free, get your own 
+    "api_key": "63c040d43251adf726d4478ff209ef59"
+  },
   { "type": "battery", "align": "right", "bordered": false },
   { "type": "timeButton", "align": "right", "formatTemplate": "E MMM d h:mm a", "bordered": false  }
 ]
