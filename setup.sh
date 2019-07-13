@@ -140,4 +140,5 @@ defaults write com.apple.Terminal ShowLineMarks -int 0
 # Remove iterm2 prompt on quit
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
+
 echo "Install complete!  Check on the installs of MTMR, Vagrant, and Virtualbox. These may need to be done by hand.Also, remember to change the font on iterm2 and set your default browser!"
