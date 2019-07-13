@@ -6,7 +6,8 @@
 #	- Problem children:
 #		- Virtualbox
 #		- Vagrant
-#		- MTMR
+#	- MTMR
+#		- Will need to manually set my items.json to be symlinked to dotfiles one
 #	- Fix Dock settings
 #		- show-recents = 0
 #		- launchanim = 0
@@ -88,9 +89,6 @@ rm $HOME/.zshrc
 ln -sv $HOME/dotfiles/.zshrc $HOME/.zshrc
 rm $HOME/.vimrc
 ln -sv $HOME/dotfiles/.vimrc $HOME/.vimrc
-# This works if the file exists or not!
-echo "" > $HOME/Library/Applications\ Support/MTMR/items.json
-ln -sv $HOME/dotfiles/items.json $HOME/Library/Application\ Support/MTMR/items.json
 
 # Colorls, make tetirs, set zsh
 echo " [+] Installing colorls, sedtris, and your new shell... "
@@ -139,6 +137,5 @@ defaults write com.apple.Terminal ShowLineMarks -int 0
 
 # Remove iterm2 prompt on quit
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
-
 
 echo "Install complete!  Check on the installs of MTMR, Vagrant, and Virtualbox. These may need to be done by hand.Also, remember to change the font on iterm2 and set your default browser!"
