@@ -1,6 +1,0 @@
-[user]
-	name = Scott
-	email = email@email.email
-[core]
-	excludesfile = ~/.gitignore
-	editor = vim
