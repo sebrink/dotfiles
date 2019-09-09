@@ -170,7 +170,7 @@ if [ "$(uname)" == "Darwin" ]; then
 
 else
 	# Set default shell to zsh
-	if [[] -z "$SUDO_USER" ]]; then
+	if [[ -z "$SUDO_USER" ]]; then
 		usermod -s /bin/zsh $USER
 	else
 		usermod -s /bin/zsh $SUDO_USER
