@@ -80,10 +80,13 @@ else
 	apt-get update -y && upgrade -y
 
 	PACKAGES=(
+		zsh
 		python
-		pip
+		python-pip
 		python3
 		python3-pip
+		python-dev
+		build-essential
 		vim
 		docker-ce
 		docker-ce-cli
@@ -169,7 +172,7 @@ if [ "$(uname)" == "Darwin" ]; then
 	defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 else
 	# Set default shell to zsh
-	echo "Something something chsh"
+	usermod -s /bin/zsh
 fi
 
 echo "Install complete!  Check on the installs of MTMR, Vagrant, and Virtualbox. These may need to be done by hand.Also, remember to change the font on iterm2 and set your default browser!"
