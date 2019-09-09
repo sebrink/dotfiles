@@ -72,15 +72,22 @@ if [ "$(uname)" == "Darwin" ]; then
 # ATM this only will work for Ubuntu, that is intentional. I will make this more specific soon^TM
 else
 
+	# Setting up for VSCode
+	apt update
+	apt install software-properties-common apt-transport-https wget
+	wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+	sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+
 	# Setting up for docker
 	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable test"
+	add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable test"
 
 	# Update
 	apt-get update -y && apt-get upgrade -y
 
 	PACKAGES=(
 		zsh
+		code
 		python
 		python-pip
 		python3
