@@ -110,11 +110,6 @@ git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/t
 git clone https://github.com/amstrad/oh-my-matrix.git $HOME/.oh-my-zsh/custom/plugins/oh-my-matrix/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/
 
-# Only macos would use this
-if [ "$(uname)" == "Darwin" ]; then
-	git clone https://github.com/floor114/zsh-apple-touchbar $HOME/.oh-my-zsh/custom/plugins/zsh-apple-touchbar/
-fi
-
 echo " [+] Setting up dotfiles... "
 # Setup dotfiles
 git clone https://github.com/sebrink/dotfiles.git $HOME/dotfiles 
