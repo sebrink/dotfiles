@@ -91,11 +91,11 @@ else
 		docker-ce
 		docker-ce-cli
 		containerd.io
+		ruby
+		ruby-dev
 	)
 
 	apt install ${PACKAGES[@]} -y
-
-	# May need to enable docker service and add a docker user
 
 fi
 
@@ -170,9 +170,14 @@ if [ "$(uname)" == "Darwin" ]; then
 
 	# Remove iterm2 prompt on quit
 	defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
 else
 	# Set default shell to zsh
-	usermod -s /bin/zsh `whoami`
+	if [[] -z "$SUDO_USER" ]]; then
+		usermod -s /bin/zsh $USER
+	else
+		usermod -s /bin/zsh $SUDO_USER
+	fi
 fi
 
-echo "Install complete!  Check on the installs of MTMR, Vagrant, and Virtualbox. These may need to be done by hand.Also, remember to change the font on iterm2 and set your default browser!"
+echo "Install complete! For OSX, check on the installs of MTMR, Vagrant, and Virtualbox. These may need to be done by hand. Also, remember to change the font on iterm2 and set your default browser! For linux, things are barely tested, most stuff will work though! Probably :)."
