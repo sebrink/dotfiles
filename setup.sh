@@ -1,16 +1,6 @@
 #!/bin/bash
 # Script to automate configs on a new OSX or Linux machine! 
-# TODO: 
-#   - Automate iterm2 font selection (using defaults command?)
-#   - Set preferred browser as default browser
-#	- Problem children:
-#		- Virtualbox
-#		- Vagrant
-#	- MTMR
-#		- Will need to manually set my items.json to be symlinked to dotfiles one
-#	- Fix Dock settings
-#		- show-recents = 0
-#		- launchanim = 0
+# Author: Scott Brink
 
 # If MacOS, install brew and packages
 if [ "$(uname)" == "Darwin" ]; then
