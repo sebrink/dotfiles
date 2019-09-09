@@ -77,7 +77,7 @@ else
 	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable test"
 
 	# Update
-	apt-get update -y && upgrade -y
+	apt-get update -y && apt-get upgrade -y
 
 	PACKAGES=(
 		zsh
@@ -172,7 +172,7 @@ if [ "$(uname)" == "Darwin" ]; then
 	defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 else
 	# Set default shell to zsh
-	usermod -s /bin/zsh
+	usermod -s /bin/zsh `whoami`
 fi
 
 echo "Install complete!  Check on the installs of MTMR, Vagrant, and Virtualbox. These may need to be done by hand.Also, remember to change the font on iterm2 and set your default browser!"
