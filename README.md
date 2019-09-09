@@ -1,16 +1,13 @@
 # Scott's dotfiles
 
-### Setup instructions (OSX Only)
+## Setup instructions (OSX Only)
+### OSX
 - bash setup.sh 
-- **That's it.** 
 - Three things at the end require sudo. Do not run the script as sudo, as brew doesn't like that
+### Linux
+- sudo bash setup.sh
+- If you would like to have your root login be the same, just run the script as root. Not with sudo! As the root user.
 
-### TODO (Listed at top of setup.sh)
-- Set the right click to the bottom right of the touchpad
-- Automate iterm2 font selection (using defaults command?)
-- Automate iterm2 profile
-- Set browser as default browser (browser of choice atm is brave)
-- Remove enter click on brew installation
-- Add colors to the install messages
-- See if applescript will do anything better than what is being done now
-- Automate the dock setup (on the left with my expected setup)
+## TODO
+- Add other flavors of linux (more package managers than anything)
+- Add question on whether or not to use my dotfiles or not
