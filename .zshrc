@@ -50,10 +50,9 @@ alias down="prompt_powerlevel9k_teardown"
 alias up="prompt_powerlevel9k_setup"
 alias yeet="curl parrot.live"
 alias python="python3"
-alias tree="tree | lolcat"
 alias ls="colorls"
 alias tetris="bash /opt/sedtris/sedtris.sh"
-alias con="ping -c 2 1.1.1.1"
+alias p="ping 1.1.1.1"
 
 ## Disable annoying settings
 unsetopt correct_all
