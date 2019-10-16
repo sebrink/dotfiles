@@ -1,70 +1,100 @@
 #!/bin/bash
-# Script to automate configs on a new OSX machine! 
-# TODO: 
-#   - Automate iterm2 font selection (using defaults command?)
-#   - Set preferred browser as default browser
-#	- Problem children:
-#		- Virtualbox
-#		- Vagrant
-#	- MTMR
-#		- Will need to manually set my items.json to be symlinked to dotfiles one
-#	- Fix Dock settings
-#		- show-recents = 0
-#		- launchanim = 0
+# Script to automate configs on a new OSX or Linux machine! 
+# Author: Scott Brink
 
-# Install brew
-echo " [+] Installing brew and tapping useful casks... "
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
+# If MacOS, install brew and packages
+if [ "$(uname)" == "Darwin" ]; then
 
-# Tap some useful things
-brew tap caskroom/cask
-brew tap caskroom/fonts
+	# Install brew
+	echo " [+] Installing brew and tapping useful casks... "
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
 
-# Other useful utilities
-PACKAGES=(
-	wget
-	zsh
-	coreutils
-	findutils
-	tree
-	git
-	ssh-copy-id
-	htop
-	sl
-	thefuck
-	python
-	python3
-	vim
-)    
+	# Tap some useful things
+	brew tap caskroom/cask
+	brew tap caskroom/fonts
 
-echo " [+] Installing Packages... "
-brew install ${PACKAGES[@]}
+	# Other useful utilities
+	PACKAGES=(
+		wget
+		zsh
+		coreutils
+		findutils
+		tree
+		git
+		ssh-copy-id
+		htop
+		sl
+		thefuck
+		python
+		python3
+		vim
+	)    
 
-# Useful applications 
-CASKS=(
-	mtmr
-	slack
-	iterm2
-	visual-studio-code
-	docker
-	postman
-	spotify
-	spectacle
-	signal
-	android-studio
-	vmware-fusion
-	brave-browser
-	vivaldi
-	google-chrome
-	firefox
-	font-hack-nerd-font
-	sloth
-	vagrant
-	vagrant-manager
-)
+	echo " [+] Installing Packages... "
+	brew install ${PACKAGES[@]}
 
-echo " [+] Installing Casks... "
-brew cask install ${CASKS[@]}
+	# Useful applications 
+	CASKS=(
+		mtmr
+		slack
+		iterm2
+		visual-studio-code
+		docker
+		postman
+		spotify
+		spectacle
+		signal
+		android-studio
+		vmware-fusion
+		brave-browser
+		vivaldi
+		google-chrome
+		firefox
+		font-hack-nerd-font
+		sloth
+		vagrant
+		vagrant-manager
+	)
+
+	echo " [+] Installing Casks... "
+	brew cask install ${CASKS[@]}
+
+# ATM this only will work for Ubuntu, that is intentional. I will make this more specific soon^TM
+else
+
+	# Setting up for VSCode
+	apt update
+	apt install software-properties-common apt-transport-https wget -y
+	wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+	sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+
+	# Setting up for docker
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+	add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable test"
+
+	# Update
+	apt-get update -y && apt-get upgrade -y
+
+	PACKAGES=(
+		zsh
+		code
+		python
+		python-pip
+		python3
+		python3-pip
+		python-dev
+		build-essential
+		vim
+		docker-ce
+		docker-ce-cli
+		containerd.io
+		ruby
+		ruby-dev
+	)
+
+	apt install ${PACKAGES[@]} -y
+
+fi
 
 echo " [+] Installing the oh-my-zsh... " 
 curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
@@ -79,7 +109,6 @@ git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/t
 # Plugins
 git clone https://github.com/amstrad/oh-my-matrix.git $HOME/.oh-my-zsh/custom/plugins/oh-my-matrix/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/
-git clone https://github.com/floor114/zsh-apple-touchbar $HOME/.oh-my-zsh/custom/plugins/zsh-apple-touchbar/
 
 echo " [+] Setting up dotfiles... "
 # Setup dotfiles
@@ -95,47 +124,57 @@ echo " [+] Installing colorls, sedtris, and your new shell... "
 sudo gem install colorls
 sudo git clone https://github.com/uuner/sedtris.git /opt/sedtris
 
-# This line sets ZSH as the curr user's shell. Catalina, come fast so I can remove this.
-sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+if [ "$(uname)" == "Darwin" ]; then
+	# This line sets ZSH as the curr user's shell. Catalina, come fast so I can remove this.
+	sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 
-# Defaults time!
+	# Defaults time!
 
-# Trackpad: map bottom right corner to right-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+	# Trackpad: map bottom right corner to right-click
+	defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+	defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+	defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+	defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
-# Save screenshots to the desktop
-defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+	# Save screenshots to the desktop
+	defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 
-# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
-defaults write com.apple.finder QuitMenuItem -bool true
+	# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
+	defaults write com.apple.finder QuitMenuItem -bool true
 
-# Remove all default applications on dock
-defaults write com.apple.dock persistent-apps -array
+	# Remove all default applications on dock
+	defaults write com.apple.dock persistent-apps -array
 
-# Adding Icons to the Dock
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Slack.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Brave Browser.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/VMware Fusion.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Visual Studio Code.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Spotify.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Messages.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Notes.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+	# Adding Icons to the Dock
+	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Slack.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Brave Browser.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/VMware Fusion.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Visual Studio Code.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Spotify.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Messages.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Notes.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
-# Sets autohide on the dock
-defaults write com.apple.dock autohide -int 1
+	# Sets autohide on the dock
+	defaults write com.apple.dock autohide -int 1
 
-# Sets dock to the left side of the screen
-defaults write com.apple.dock orientation left
+	# Sets dock to the left side of the screen
+	defaults write com.apple.dock orientation left
 
-# Disable the annoying line marks in iterm2
-defaults write com.apple.Terminal ShowLineMarks -int 0
+	# Disable the annoying line marks in iterm2
+	defaults write com.apple.Terminal ShowLineMarks -int 0
 
-# Remove iterm2 prompt on quit
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+	# Remove iterm2 prompt on quit
+	defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
-echo "Install complete!  Check on the installs of MTMR, Vagrant, and Virtualbox. These may need to be done by hand.Also, remember to change the font on iterm2 and set your default browser!"
+else
+	# Set default shell to zsh
+	if [[ -z "$SUDO_USER" ]]; then
+		usermod -s /bin/zsh $USER
+	else
+		usermod -s /bin/zsh $SUDO_USER
+	fi
+fi
+
+echo "Install complete! For OSX, check on the installs of MTMR, Vagrant, and Virtualbox. These may need to be done by hand. Also, remember to change the font on iterm2 and set your default browser! For linux, things are barely tested, most stuff will work though! Probably :)."
