@@ -17,4 +17,3 @@ syntax on
 """ I forget what to classify this under
 set paste
 set backspace=indent,eol,start
-

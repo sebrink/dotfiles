@@ -25,13 +25,14 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(root_indicator time)
 case "$OSTYPE" in
 	darwin*)
 		
-		export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+		export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/usr/local/sbin/"
 		export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
+		# export PATH="/usr/local/opt/inetutils/libexec/gnubin:$PATH"
 		export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
 
 		# Fuck settings
 		eval $(thefuck --alias)
-
+		unalias mysql
 	;;
 	linux*)
 		# Eventually I may put something here
