@@ -50,10 +50,15 @@ alias c="clear"
 alias down="prompt_powerlevel9k_teardown"
 alias up="prompt_powerlevel9k_setup"
 alias yeet="curl parrot.live"
-alias python="python3"
 alias ls="colorls"
 alias tetris="bash /opt/sedtris/sedtris.sh"
 alias p="ping 1.1.1.1"
+
+# Git
+alias gs="git status"
+alias gc="git commit -m $1"
+alias ga="git add $@"
+alias gp="git push"
 
 ## Disable annoying settings
 unsetopt correct_all
