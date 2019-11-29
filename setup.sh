@@ -113,9 +113,12 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-
 echo " [+] Setting up dotfiles... "
 # Setup dotfiles
 git clone https://github.com/sebrink/dotfiles.git $HOME/dotfiles 
+touch $HOME/.gitconfig
 mv $HOME/dotfiles/.gitconfig $HOME/.gitconfig
+touch $HOME/.zshrc
 rm $HOME/.zshrc
 ln -sv $HOME/dotfiles/.zshrc $HOME/.zshrc
+touch $HOME/.vimrc
 rm $HOME/.vimrc
 ln -sv $HOME/dotfiles/.vimrc $HOME/.vimrc
 
