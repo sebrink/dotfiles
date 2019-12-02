@@ -30,6 +30,12 @@ case "$OSTYPE" in
 		# export PATH="/usr/local/opt/inetutils/libexec/gnubin:$PATH"
 		export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
 
+
+		# Go Dev
+		export GOPATH="$HOME/go"
+		export GOROOT="$(brew --prefix golang)/libexec"
+		export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
 		# Fuck settings
 		eval $(thefuck --alias)
 		unalias mysql
