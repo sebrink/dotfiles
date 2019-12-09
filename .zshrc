@@ -68,7 +68,7 @@ alias gp="git push"
 
 # Tmux
 alias tn="tmux new -s"
-alias ta="tmux attach -s"
+alias ta="tmux attach -t"
 alias tl="tmux ls"
 alias td="tmux detach"
 
