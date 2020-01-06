@@ -66,5 +66,11 @@ alias gc="git commit -m $1"
 alias ga="git add $@"
 alias gp="git push"
 
+# Tmux
+alias tn="tmux new -s"
+alias ta="tmux attach -t"
+alias tl="tmux ls"
+alias td="tmux detach"
+
 ## Disable annoying settings
 unsetopt correct_all
