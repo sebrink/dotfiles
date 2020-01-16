@@ -16,7 +16,6 @@ if [ "$(uname)" == "Darwin" ]; then
 	# Other useful utilities
 	PACKAGES=(
 		wget
-		zsh
 		coreutils
 		findutils
 		tree
@@ -28,6 +27,7 @@ if [ "$(uname)" == "Darwin" ]; then
 		python
 		python3
 		vim
+		sslscan
 	)    
 
 	echo " [+] Installing Packages... "
@@ -44,16 +44,11 @@ if [ "$(uname)" == "Darwin" ]; then
 		spotify
 		spectacle
 		signal
-		android-studio
 		vmware-fusion
-		brave-browser
-		vivaldi
 		google-chrome
 		firefox
 		font-hack-nerd-font
-		sloth
 		vagrant
-		vagrant-manager
 	)
 
 	echo " [+] Installing Casks... "
@@ -133,7 +128,7 @@ sudo git clone https://github.com/uuner/sedtris.git /opt/sedtris
 
 if [ "$(uname)" == "Darwin" ]; then
 	# This line sets ZSH as the curr user's shell. Catalina, come fast so I can remove this.
-	sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+	sudo dscl . -create /Users/$USER UserShell `which zsh`
 
 	# Defaults time!
 
