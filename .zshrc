@@ -10,11 +10,11 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 ## Plugins
-plugins=( git oh-my-matrix pip python osx zsh-syntax-highlighting )
-source $ZSH/oh-my-zsh.sh
+# plugins=( git oh-my-matrix pip python osx zsh-syntax-highlighting )
+# source $ZSH/oh-my-zsh.sh
 
 ## If purepower theme      
-source ~/.purepower
+# source ~/.purepower
 
 ## If no purepower theme
 ## Powerline settings
@@ -30,15 +30,13 @@ case "$OSTYPE" in
 		# export PATH="/usr/local/opt/inetutils/libexec/gnubin:$PATH"
 		export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
 
-
 		# Go Dev
 		export GOPATH="$HOME/go"
-		export GOROOT="$(brew --prefix golang)/libexec"
+		export GOROOT="/usr/local/opt/go/libexec"
 		export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 		# Fuck settings
 		eval $(thefuck --alias)
-		unalias mysql
 	;;
 	linux*)
 		# Eventually I may put something here
@@ -56,7 +54,9 @@ alias c="clear"
 alias down="prompt_powerlevel9k_teardown"
 alias up="prompt_powerlevel9k_setup"
 alias yeet="curl parrot.live"
-alias ls="colorls"
+# Commented out colorls to test exa
+# alias ls="colorls"
+alias ls="exa" 
 alias tetris="bash /opt/sedtris/sedtris.sh"
 alias p="ping 1.1.1.1"
 
