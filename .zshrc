@@ -3,23 +3,15 @@ export TERM="xterm-256color"
 export ZSH="$HOME/.oh-my-zsh"
 
 ## ZSH Settings
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="risto"
 CASE_SENSITIVE="false"
 HYPHEN_INSENSITIVE="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 ## Plugins
-# plugins=( git oh-my-matrix pip python osx zsh-syntax-highlighting )
-# source $ZSH/oh-my-zsh.sh
-
-## If purepower theme      
-# source ~/.purepower
-
-## If no purepower theme
-## Powerline settings
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(root_indicator time)
+plugins=( git pip python osx zsh-syntax-highlighting zsh-autosuggestions)
+source $ZSH/oh-my-zsh.sh
 
 ## Path Additions and OS specific settings
 case "$OSTYPE" in
@@ -29,14 +21,11 @@ case "$OSTYPE" in
 		export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
 		# export PATH="/usr/local/opt/inetutils/libexec/gnubin:$PATH"
 		export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
+		export JAVA_HOME=/usr/local/opt/openjdk@11
 
 		# Go Dev
 		export GOPATH="$HOME/go"
-		export GOROOT="/usr/local/opt/go/libexec"
 		export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-
-		# Fuck settings
-		eval $(thefuck --alias)
 	;;
 	linux*)
 		# Eventually I may put something here
@@ -51,14 +40,11 @@ alias zshrc="vim ~/.zshrc && source ~/.zshrc"
 alias vi="vim"
 alias l="ls -la"
 alias c="clear"
-alias down="prompt_powerlevel9k_teardown"
-alias up="prompt_powerlevel9k_setup"
-alias yeet="curl parrot.live"
-# Commented out colorls to test exa
-# alias ls="colorls"
-alias ls="exa" 
+alias ls="exa"
 alias tetris="bash /opt/sedtris/sedtris.sh"
 alias p="ping 1.1.1.1"
+alias yeet="curl parrot.live"
+alias buh="bash"
 
 # Git
 alias gs="git status"
@@ -74,3 +60,13 @@ alias td="tmux detach"
 
 ## Disable annoying settings
 unsetopt correct_all
+
+# Why isn't this just a one liner? Who knows.
+function rt () {
+	a=$(grep -v alias ~/.zshrc | grep THEME | cut -d'"' -f2);
+	b=$(shuf -n 1 ~/dotfiles/.zsh-themes);
+	sed -i '' "s/$a/$b/g" ~/.zshrc;
+	unset a
+	unset b
+	source ~/.zshrc
+}
