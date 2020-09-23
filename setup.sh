@@ -10,8 +10,8 @@ if [ "$(uname)" == "Darwin" ]; then
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
 
 	# Tap some useful things
-	brew tap caskroom/cask
-	brew tap caskroom/fonts
+	brew tap homebrew/cask
+	brew tap homebrew/cask-fonts
 
 	# Other useful utilities
 	PACKAGES=(
