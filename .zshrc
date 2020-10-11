@@ -19,6 +19,7 @@ case "$OSTYPE" in
 		
 		export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/usr/local/sbin/"
 		export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
+		export PATH="$PATH:/Users/scott/Documents/tools/neo4j/bin:$PATH"
 		# export PATH="/usr/local/opt/inetutils/libexec/gnubin:$PATH"
 		export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
 		export JAVA_HOME=/usr/local/opt/openjdk@11
@@ -70,3 +71,6 @@ function rt () {
 	unset b
 	source ~/.zshrc
 }
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
