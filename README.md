@@ -9,5 +9,5 @@
 - If you would like to have your root login be the same, just run the script as root. Not with sudo, just as the root user.
 
 ## TODO
-- Add other flavors of linux (more package managers than anything)
 - Add question on whether or not to use my dotfiles or not
+- Add way to programtically add Profiles.json to iterm

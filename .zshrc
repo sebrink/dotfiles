@@ -17,10 +17,7 @@ source $ZSH/oh-my-zsh.sh
 case "$OSTYPE" in
 	darwin*)
 		
-		export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/usr/local/sbin/"
-		export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
-		export PATH="$PATH:/Users/scott/Documents/tools/neo4j/bin:$PATH"
-		# export PATH="/usr/local/opt/inetutils/libexec/gnubin:$PATH"
+		#export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/usr/local/sbin/"
 		export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
 		export JAVA_HOME=/usr/local/opt/openjdk@11
 
@@ -33,7 +30,7 @@ case "$OSTYPE" in
 	;;
 esac
 
-export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/ed_25519"
 
 ## Aliases
 alias vimrc="vim ~/.vimrc"
@@ -42,10 +39,8 @@ alias vi="vim"
 alias l="ls -la"
 alias c="clear"
 alias ls="exa"
-alias tetris="bash /opt/sedtris/sedtris.sh"
 alias p="ping 1.1.1.1"
 alias yeet="curl parrot.live"
-alias buh="bash"
 
 # Git
 alias gs="git status"
@@ -63,6 +58,8 @@ alias td="tmux detach"
 unsetopt correct_all
 
 # Why isn't this just a one liner? Who knows.
+# TIL there is a theme you can set called RANDOM which does this
+# Woops.
 function rt () {
 	a=$(grep -v alias ~/.zshrc | grep THEME | cut -d'"' -f2);
 	b=$(shuf -n 1 ~/dotfiles/.zsh-themes);
@@ -71,6 +68,3 @@ function rt () {
 	unset b
 	source ~/.zshrc
 }
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"

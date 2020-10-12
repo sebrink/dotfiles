@@ -6,53 +6,12 @@
 if [ "$(uname)" == "Darwin" ]; then
 
 	# Install brew
-	echo " [+] Installing brew and tapping useful casks... "
+	echo " [+] Installing Brew"
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
 
-	# Tap some useful things
-	brew tap homebrew/cask
-	brew tap homebrew/cask-fonts
-
-	# Other useful utilities
-	PACKAGES=(
-		wget
-		coreutils
-		findutils
-		tree
-		git
-		ssh-copy-id
-		htop
-		sl
-		thefuck
-		python
-		python3
-		vim
-		sslscan
-	)    
-
-	echo " [+] Installing Packages... "
-	brew install ${PACKAGES[@]}
-
-	# Useful applications 
-	CASKS=(
-		mtmr
-		slack
-		iterm2
-		visual-studio-code
-		docker
-		postman
-		spotify
-		spectacle
-		signal
-		vmware-fusion
-		google-chrome
-		firefox
-		font-hack-nerd-font
-		vagrant
-	)
-
-	echo " [+] Installing Casks... "
-	brew cask install ${CASKS[@]}
+	echo " [+] Installing Brewfile contents"
+	# This assumes brewfile is in the same directory. If it isn't, you're going to hvae a bad time.
+	brew bundle
 
 # ATM this only will work for Ubuntu, that is intentional. I will make this more specific soon^TM
 else
@@ -92,13 +51,13 @@ else
 
 fi
 
-echo " [+] Installing the oh-my-zsh... " 
+echo " [+] Installing the oh-my-zsh " 
 curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 sh install.sh --unattended
 rm install.sh
 
 # Themes
-echo " [+] Downloading oh-my-zsh themes and plugins... "
+echo " [+] Downloading oh-my-zsh themes and plugins"
 git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k/
 ( cd && curl -fsSLO https://raw.githubusercontent.com/romkatv/dotfiles-public/master/.purepower )
 
@@ -121,14 +80,10 @@ touch $HOME/.tmux.conf
 rm $HOME/.tmux.conf
 ln -sv $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
 
-# Colorls, make tetirs, set zsh
-echo " [+] Installing colorls, sedtris, and your new shell... "
-sudo gem install colorls
-sudo git clone https://github.com/uuner/sedtris.git /opt/sedtris
-
 if [ "$(uname)" == "Darwin" ]; then
-	# This line sets ZSH as the curr user's shell. Catalina, come fast so I can remove this.
-	sudo dscl . -create /Users/$USER UserShell `which zsh`
+
+	# Set default browser
+	defaultbrowser firefox
 
 	# Defaults time!
 
@@ -137,6 +92,9 @@ if [ "$(uname)" == "Darwin" ]; then
 	defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 	defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 	defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+
+	# Fix the scroll direction to actually make sense
+	defaults write -g com.apple.swipescrolldirection -bool FALSE
 
 	# Save screenshots to the desktop
 	defaults write com.apple.screencapture location -string "${HOME}/Desktop"
@@ -149,14 +107,11 @@ if [ "$(uname)" == "Darwin" ]; then
 
 	# Adding Icons to the Dock
 	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Slack.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Brave Browser.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Firefox.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/VMware Fusion.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Visual Studio Code.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Spotify.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Messages.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Notes.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-	defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
 	# Sets autohide on the dock
 	defaults write com.apple.dock autohide -int 1
@@ -170,7 +125,11 @@ if [ "$(uname)" == "Darwin" ]; then
 	# Remove iterm2 prompt on quit
 	defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
-else
+	## TODO
+	# Programactically import the json profiles to have instant drop down terminal
+
+# This atm is anything that is not darwin, aka any non macOS
+else 
 	# Set default shell to zsh
 	if [[ -z "$SUDO_USER" ]]; then
 		usermod -s `which zsh` $USER
@@ -179,4 +138,4 @@ else
 	fi
 fi
 
-echo "Install complete! For OSX, check on the installs of MTMR, Vagrant, and Virtualbox. These may need to be done by hand. Also, remember to change the font on iterm2 and set your default browser! For linux, things are barely tested, most stuff will work though! Probably :)."
+echo "Install complete! For OSX, you will need to install Virtualbox, Vagrant, VMWare Fusion manually because they prompt for a password."
