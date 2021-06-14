@@ -8,6 +8,6 @@
 - sudo bash setup.sh
 - If you would like to have your root login be the same, just run the script as root. Not with sudo, just as the root user.
 
-## TODO
-- Add question on whether or not to use my dotfiles or not
-- Add way to programtically add Profiles.json to iterm
+## TODO/KNown Issues
+- Add question on whether or not to use my dotfiles or not.
+- If you don't have xcode tools installed, macOS gets REALLY angry at you.
