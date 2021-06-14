@@ -10,8 +10,10 @@ if [ "$(uname)" == "Darwin" ]; then
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
 
 	echo " [+] Installing Brewfile contents"
-	# This assumes brewfile is in the same directory. If it isn't, you're going to hvae a bad time.
+	# This assumes brewfile is in the same directory. If it isn't, you're going to have a bad time.
 	brew bundle
+	# This is installed separately since I remove it after I set firefox
+	brew install defaultbrowser
 
 # ATM this only will work for Ubuntu, that is intentional. I will make this more specific soon^TM
 else
@@ -62,8 +64,8 @@ git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/t
 ( cd && curl -fsSLO https://raw.githubusercontent.com/romkatv/dotfiles-public/master/.purepower )
 
 # Plugins
-git clone https://github.com/amstrad/oh-my-matrix.git $HOME/.oh-my-zsh/custom/plugins/oh-my-matrix/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/
+plugins=(git zsh-syntax-highlighting)
 
 echo " [+] Setting up dotfiles... "
 # Setup dotfiles
@@ -84,6 +86,7 @@ if [ "$(uname)" == "Darwin" ]; then
 
 	# Set default browser
 	defaultbrowser firefox
+	brew uninstall defaultbrowser
 
 	# Defaults time!
 
