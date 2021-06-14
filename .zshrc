@@ -17,13 +17,15 @@ source $ZSH/oh-my-zsh.sh
 case "$OSTYPE" in
 	darwin*)
 		
-		#export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/usr/local/sbin/"
 		export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
 		export JAVA_HOME=/usr/local/opt/openjdk@11
 
 		# Go Dev
 		export GOPATH="$HOME/go"
 		export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
+		# x11
+		export PATH="$PATH:/opt/X11/bin/"
 	;;
 	linux*)
 		# Eventually I may put something here
@@ -68,3 +70,9 @@ function rt () {
 	unset b
 	source ~/.zshrc
 }
+
+jdk() {
+        version=$1
+        export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+        java -version
+ }
