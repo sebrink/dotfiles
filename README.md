@@ -11,3 +11,4 @@
 ## TODO
 - Add question on whether or not to use my dotfiles or not
 - Add way to programtically add Profiles.json to iterm
+- Sidebar doesn't work omegalul
