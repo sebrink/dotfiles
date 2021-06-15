@@ -7,9 +7,9 @@ if [ "$(uname)" == "Darwin" ]; then
 
 	# Install brew
 	echo " [+] Installing Brew"
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
-
-	echo " [+] Installing Brewfile contents"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	
+    echo " [+] Installing Brewfile contents"
 	# This assumes brewfile is in the same directory. If it isn't, you're going to have a bad time.
 	brew bundle
 	# This is installed separately since I remove it after I set firefox
@@ -65,7 +65,7 @@ git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/t
 
 # Plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/
-plugins=(git zsh-syntax-highlighting)
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions/
 
 echo " [+] Setting up dotfiles... "
 # Setup dotfiles
