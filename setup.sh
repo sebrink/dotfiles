@@ -104,6 +104,9 @@ if [ "$(uname)" == "Darwin" ]; then
 
 	# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
 	defaults write com.apple.finder QuitMenuItem -bool true
+	
+	# Finder: shows hidden files by default
+	defaults write com.apple.finder AppleShowAllFiles YES
 
 	# Remove all default applications on dock
 	defaults write com.apple.dock persistent-apps -array
